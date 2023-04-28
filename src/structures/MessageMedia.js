@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const mime = require("../util/mime/index");
+const mime = require("mime");
 const {URL} = require("url");
 
 /**
