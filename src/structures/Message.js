@@ -417,7 +417,7 @@ class Message extends Base {
       }
 
       try {
-        const decryptedMedia = await window.Store.DownloadManager.downloadAndMaybeDecrypt({
+        const decryptedMedia = await window.Store.DownloadManager.downloadAndDecrypt({
           directPath: msg.directPath,
           encFilehash: msg.encFilehash,
           filehash: msg.filehash,

@@ -97,7 +97,10 @@ class Client extends EventEmitter {
         browserArgs.push(`--user-agent=${this.options.userAgent}`);
       }
 
-      browser = await puppeteer.launch({...puppeteerOpts, args: browserArgs});
+      browser = await puppeteer.launch({
+        ...puppeteerOpts,
+        args: browserArgs,
+      });
       page = (await browser.pages())[0];
     }
 
@@ -162,13 +165,17 @@ class Client extends EventEmitter {
     const needAuthentication = await Promise.race([
       new Promise((resolve) => {
         page
-          .waitForSelector(INTRO_IMG_SELECTOR, {timeout: this.options.authTimeoutMs})
+          .waitForSelector(INTRO_IMG_SELECTOR, {
+            timeout: this.options.authTimeoutMs,
+          })
           .then(() => resolve(false))
           .catch((err) => resolve(err));
       }),
       new Promise((resolve) => {
         page
-          .waitForSelector(INTRO_QRCODE_SELECTOR, {timeout: this.options.authTimeoutMs})
+          .waitForSelector(INTRO_QRCODE_SELECTOR, {
+            timeout: this.options.authTimeoutMs,
+          })
           .then(() => resolve(true))
           .catch((err) => resolve(err));
       }),
@@ -289,7 +296,10 @@ class Client extends EventEmitter {
     this.info = new ClientInfo(
       this,
       await page.evaluate(() => {
-        return {...window.Store.Conn.serialize(), wid: window.Store.User.getMeUser()};
+        return {
+          ...window.Store.Conn.serialize(),
+          wid: window.Store.User.getMeUser(),
+        };
       })
     );
 
@@ -540,7 +550,12 @@ class Client extends EventEmitter {
               const parentMsgKey = window.Store.MsgKey.fromString(reaction.parentMsgKey);
               const timestamp = reaction.timestamp / 1000;
 
-              return {...reaction, msgKey, parentMsgKey, timestamp};
+              return {
+                ...reaction,
+                msgKey,
+                parentMsgKey,
+                timestamp,
+              };
             })
           );
 
@@ -691,7 +706,7 @@ class Client extends EventEmitter {
         }
 
         const msg = await window.WWebJS.sendMessage(chat, message, options, sendSeen);
-        return msg.serialize();
+        return JSON.parse(JSON.stringify(msg));
       },
       chatId,
       content,
