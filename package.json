@@ -1,0 +1,22 @@
+{
+  "name": "hedystia.web",
+  "version": "0.1.0",
+  "description": "API",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "contact@hedystia.com",
+  "license": "ISC",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2",
+    "jsqr": "^1.3.1",
+    "node-webpmux": "^3.1.0",
+    "puppeteer": "^19.11.1"
+  },
+  "engines": {
+    "node": ">=18.7.0"
+  },
+  "repository": "https://github.com/Zastinian/hedystia.web.git",
+  "keywords": [
+    "api"
+  ]
+}
